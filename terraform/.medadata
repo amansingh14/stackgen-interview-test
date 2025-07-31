@@ -1,0 +1,7 @@
+{
+  "app_stack_name": "stackgen-petclinic-aws",
+  "iac_type": "Terraform",
+  "provider": "azure",
+  "multi_env": false,
+  "exporter": "terraform"
+}
