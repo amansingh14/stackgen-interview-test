@@ -30,12 +30,6 @@ variable "postgresql_configuration" {
   default     = {}
 }
 
-variable "tags" {
-  description = "Tags to apply to all resources"
-  type        = map(string)
-  default     = {}
-}
-
 variable "instance_type" {
   description = "Instance type for Redis (e.g., cache.t3.micro)"
   type        = string
@@ -61,11 +55,6 @@ variable "availability_zones" {
   type        = list(string)
 }
 
-variable "database_name" {
-  description = "Name of the database in PostgreSQL"
-  type        = string
-}
-
 variable "username" {
   description = "Username for the database user"
   type        = string
@@ -79,6 +68,10 @@ variable "aws_region" {
 variable "environment" {
   description = "Environment identifier (e.g., dev, prod)"
   type        = string
+}
+
+variable "database_name" {
+  default = ""
 }
 
 variable "vpc_id" {
