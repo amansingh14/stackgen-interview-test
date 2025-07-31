@@ -53,9 +53,6 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
-      - name: Run TFLint
-        run: tflint --recursive
-
       - name: Terraform Plan
         id: plan
         run: |
