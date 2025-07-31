@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - 'terraform/**'
 
 permissions:
   contents: read
@@ -59,7 +61,7 @@ jobs:
           terraform plan \
             -var="administrator_login_password=${{ secrets.ADMIN_PASSWORD }}" \
             -out=tfplan.out \
-            -no-color > plan.txt
+            -no-color | tee plan.txt
         continue-on-error: true
 
       - name: Upload plan to PR

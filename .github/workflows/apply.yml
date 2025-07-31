@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - main
-
+    paths:
+      - 'terraform/**'
 env:
   TF_WORKING_DIR: terraform
   AWS_REGION: ap-south-1
