@@ -15,6 +15,10 @@ env:
   TF_WORKING_DIR: terraform
   AWS_REGION: ap-south-1
 
+defaults:
+  run:
+    working-directory: ${{ env.TF_WORKING_DIR }}
+
 jobs:
   terraform:
     name: Terraform Validate & Plan
@@ -26,10 +30,6 @@ jobs:
       id-token: write
       contents: read
       pull-requests: write
-
-    defaults:
-      run:
-        working-directory: ${{ env.TF_WORKING_DIR }}
 
     steps:
       - name: Checkout repository
@@ -59,6 +59,7 @@ jobs:
         id: plan
         run: |
           terraform plan \
+            -var-file="terraform.tfvars" \
             -var="administrator_login_password=${{ secrets.ADMIN_PASSWORD }}" \
             -out=tfplan.out \
             -no-color | tee plan.txt

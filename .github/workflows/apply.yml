@@ -10,6 +10,9 @@ env:
   TF_WORKING_DIR: terraform
   AWS_REGION: ap-south-1
 
+defaults:
+  run:
+    working-directory: ${{ env.TF_WORKING_DIR }}
 
 jobs:
   terraform-apply:
@@ -21,10 +24,6 @@ jobs:
     permissions:
       id-token: write
       contents: read
-
-    defaults:
-      run:
-        working-directory: ${{ env.TF_WORKING_DIR }}
 
     steps:
       - name: Checkout repository
@@ -50,5 +49,6 @@ jobs:
       - name: Terraform Apply
         run: |
           terraform apply \
+            -var-file="terraform.tfvars" \
             -var="administrator_login_password=${{ secrets.ADMIN_PASSWORD }}" \
             -auto-approve
