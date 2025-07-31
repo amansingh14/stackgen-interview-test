@@ -53,11 +53,6 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
-      - name: Install TFLint
-        uses: terraform-linters/setup-tflint@v4
-        with:
-          tflint_version: latest
-
       - name: Run TFLint
         run: tflint --recursive
 
