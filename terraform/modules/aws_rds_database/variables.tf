@@ -99,15 +99,15 @@ variable "replica_instance_class" {
 }
 
 variable "replicate_source_db" {
-  type = string
+  type        = string
   description = "Identifier of the source database from which to replicate data."
-  default = ""
+  default     = ""
 }
 
 variable "db_name" {
-  type = string
+  type        = string
   description = "The name of your database."
-  default = ""
+  default     = ""
 }
 
 variable "max_allocated_storage" {

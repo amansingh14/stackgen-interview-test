@@ -21,33 +21,33 @@ variable "resources" {
 }
 
 variable "data_actions" {
-  type        = list(string)
-  default     = []
+  type    = list(string)
+  default = []
 }
 
 variable "data_resources" {
-  type        = list(string)
-  default     = ["*"]
+  type    = list(string)
+  default = ["*"]
 }
 
 variable "not_actions" {
-  type        = list(string)
-  default     = []
+  type    = list(string)
+  default = []
 }
 
 variable "not_action_resources" {
-  type        = list(string)
-  default     = ["*"]
+  type    = list(string)
+  default = ["*"]
 }
 
 variable "not_data_actions" {
-  type        = list(string)
-  default     = []
+  type    = list(string)
+  default = []
 }
 
 variable "not_data_action_resources" {
-  type        = list(string)
-  default     = ["*"]
+  type    = list(string)
+  default = ["*"]
 }
 
 variable "principal_id" {
@@ -56,6 +56,6 @@ variable "principal_id" {
 }
 
 variable "tags" {
-  type        = map(string)
-  default     = {}
+  type    = map(string)
+  default = {}
 }
