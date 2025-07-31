@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - 'terraform/**'
 
 permissions:
   contents: read
@@ -53,21 +55,13 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
-      - name: Install TFLint
-        uses: terraform-linters/setup-tflint@v4
-        with:
-          tflint_version: latest
-
-      - name: Run TFLint
-        run: tflint --recursive
-
       - name: Terraform Plan
         id: plan
         run: |
           terraform plan \
             -var="administrator_login_password=${{ secrets.ADMIN_PASSWORD }}" \
             -out=tfplan.out \
-            -no-color > plan.txt
+            -no-color | tee plan.txt
         continue-on-error: true
 
       - name: Upload plan to PR

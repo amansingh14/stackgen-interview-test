@@ -20,7 +20,7 @@ resource "aws_iam_policy" "this" {
   description = var.description
   policy      = data.aws_iam_policy_document.custom_policy.json
   tags        = var.tags
-  depends_on = [data.aws_iam_policy_document.custom_policy]
+  depends_on  = [data.aws_iam_policy_document.custom_policy]
 }
 
 resource "aws_iam_role_policy_attachment" "this" {

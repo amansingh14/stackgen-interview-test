@@ -1,5 +1,5 @@
 output "bucket_name" {
-    value = aws_s3_bucket.this.id
+  value = aws_s3_bucket.this.id
 }
 
 output "bucket_arn" {
