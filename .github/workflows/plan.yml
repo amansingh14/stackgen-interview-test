@@ -15,9 +15,6 @@ env:
   TF_WORKING_DIR: terraform
   AWS_REGION: ap-south-1
 
-defaults:
-  run:
-    working-directory: ${{ env.TF_WORKING_DIR }}
 
 jobs:
   terraform:
@@ -25,6 +22,10 @@ jobs:
     runs-on: ubuntu-latest
 
     environment: dev
+
+    defaults:
+      run:
+        working-directory: ${{ env.TF_WORKING_DIR }}
 
     permissions:
       id-token: write
