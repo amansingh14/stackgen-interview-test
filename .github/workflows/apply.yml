@@ -49,6 +49,5 @@ jobs:
       - name: Terraform Apply
         run: |
           terraform apply \
-            -var-file="./${{ env.TF_WORKING_DIR }}/terraform.tfvars" \
             -var="administrator_login_password=${{ secrets.ADMIN_PASSWORD }}" \
             -auto-approve
