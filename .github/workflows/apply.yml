@@ -3,11 +3,7 @@ name: Terraform Apply
 on:
   push:
     branches:
-      - master
-
-permissions:
-  contents: read
-  pull-requests: write
+      - main
 
 env:
   TF_WORKING_DIR: terraform
@@ -18,6 +14,8 @@ jobs:
   terraform-apply:
     name: Terraform Apply
     runs-on: ubuntu-latest
+
+    environment: dev
 
     permissions:
       id-token: write
