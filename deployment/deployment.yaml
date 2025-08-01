@@ -1,4 +1,52 @@
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-petclinic
+  namespace: spring-petclinic
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring-petclinic
+  template:
+    metadata:
+      labels:
+        app: spring-petclinic
+    spec:
+      containers:
+        - name: spring-petclinic
+          image: 311042608416.dkr.ecr.ap-south-1.amazonaws.com/spring-petclinic:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: petclinic-db-config
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: petclinic-db-config
+                  key: DB_PORT
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: petclinic-db-config
+                  key: DB_NAME
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: petclinic-db-config
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: petclinic-db-config
+                  key: DB_PASSWORD
+
+---
 apiVersion: v1
 kind: Service
 metadata:

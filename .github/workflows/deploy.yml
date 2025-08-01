@@ -38,8 +38,8 @@ jobs:
           export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
 
           # Replace DB_PASSWORD in configmap
-          envsubst < deployment/configmap.yaml | kubectl apply -n spring-petclinic -f -
-          kubectl apply -n spring-petclinic -f - deployment/deployment.yaml
+          envsubst < ./deployment/configmap.yaml | kubectl apply -n spring-petclinic -f -
+          kubectl apply -n spring-petclinic -f - ./deployment/deployment.yaml
           # Apply other resources
-          kubectl apply -n spring-petclinic -f deployment/service.yaml
-          kubectl apply -n spring-petclinic -f deployment/ingress.yaml
+          kubectl apply -n spring-petclinic -f ./deployment/service.yaml
+          kubectl apply -n spring-petclinic -f ./deployment/ingress.yaml
