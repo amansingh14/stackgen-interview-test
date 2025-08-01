@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: petclinic-db-config
+  namespace: spring-petclinic
+data:
+  DB_HOST: "postgres-service"
+  DB_PORT: "5432"
+  DB_NAME: "petclinic"
+  DB_USER: "petclinic"
+  DB_PASSWORD: "${DB_PASSWORD}"
