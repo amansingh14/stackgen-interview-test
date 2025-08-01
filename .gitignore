@@ -11,8 +11,7 @@ crash.log
 crash.*.log
 
 # Variable files with secrets
-*.tfvars
-*.tfvars.json
+
 # Or more specific:
 # secrets.tfvars
 # dev.tfvars

@@ -1,5 +1,10 @@
 locals {
   resource_group_name = "ec2.amazonaws.com"
+  tags = {
+    Environment = var.environment
+    Project     = "spring-petclinic"
+  }
+
 }
 
 module "kv_key" {
@@ -27,7 +32,7 @@ module "policy_post_kv" {
   data_actions   = ["kms:Decrypt", "kms:Encrypt", "kms:Sign"]
   data_resources = [module.kv_key.kms_key_arn]
   principal_id   = module.identity.iam_role_name
-  tags           = var.tags
+  tags           = local.tags
 }
 
 module "policy_s3_bucket" {
@@ -37,7 +42,7 @@ module "policy_s3_bucket" {
   data_actions   = ["s3:GetObject", "s3:getBucketLocation", "s3:listBucket", "s3:DeleteObjectVersion"]
   data_resources = [module.s3_container.bucket_arn]
   principal_id   = module.identity.iam_role_name
-  tags           = var.tags
+  tags           = local.tags
 }
 
 module "db1" {
@@ -47,8 +52,8 @@ module "db1" {
   instance_class                = var.instance_class
   administrator_login           = var.username
   administrator_login_password  = var.administrator_login_password
-  storage                       = 625
-  max_allocated_storage         = 1000
+  storage                       = 20
+  max_allocated_storage         = 100
   backup_retention_days         = 7
   geo_redundant_backup_enabled  = true
   public_network_access_enabled = false
@@ -56,7 +61,7 @@ module "db1" {
   security_group_ids            = var.security_group_ids
   db_name                       = var.database_name
   postgresql_configuration      = var.postgresql_configuration
-  tags                          = var.tags
+  tags                          = local.tags
   iam_role_arn                  = module.identity.iam_role_arn
   kms_key_id                    = module.kv_key.kms_key_arn
 }
@@ -94,11 +99,11 @@ module "redis" {
   availability_zones   = var.availability_zones
   vpc_id               = var.vpc_id
   allowed_cidr_blocks  = ["172.31.0.0/20"]
-  tags                 = var.tags
+  tags                 = local.tags
 }
 
 module "s3_container" {
   source = "./modules/aws_s3_bucket"
   name   = "spring-petclinic-aman"
-  tags   = var.tags
+  tags   = local.tags
 }

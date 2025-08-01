@@ -15,6 +15,7 @@ env:
   TF_WORKING_DIR: terraform
   AWS_REGION: ap-south-1
 
+
 jobs:
   terraform:
     name: Terraform Validate & Plan
@@ -22,14 +23,14 @@ jobs:
 
     environment: dev
 
+    defaults:
+      run:
+        working-directory: ${{ env.TF_WORKING_DIR }}
+
     permissions:
       id-token: write
       contents: read
       pull-requests: write
-
-    defaults:
-      run:
-        working-directory: ${{ env.TF_WORKING_DIR }}
 
     steps:
       - name: Checkout repository

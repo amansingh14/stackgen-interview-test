@@ -10,7 +10,6 @@ env:
   TF_WORKING_DIR: terraform
   AWS_REGION: ap-south-1
 
-
 jobs:
   terraform-apply:
     name: Terraform Apply
@@ -18,13 +17,13 @@ jobs:
 
     environment: dev
 
-    permissions:
-      id-token: write
-      contents: read
-
     defaults:
       run:
         working-directory: ${{ env.TF_WORKING_DIR }}
+
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - name: Checkout repository
