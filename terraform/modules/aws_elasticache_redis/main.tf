@@ -1,5 +1,5 @@
 resource "aws_elasticache_subnet_group" "this" {
-  name       = "${var.cache_name}-subnet-group"
+  name       = "${var.cache_name}-subnet-group-1"
   subnet_ids = var.subnet_ids
 }
 
@@ -26,7 +26,7 @@ resource "aws_elasticache_replication_group" "this" {
 
 
 resource "aws_security_group" "redis" {
-  name        = "${var.cache_name}-sg"
+  name        = "${var.cache_name}-sg-1"
   description = "Allow Redis access"
   vpc_id      = var.vpc_id
 
