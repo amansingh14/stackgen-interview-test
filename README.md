@@ -24,3 +24,9 @@ This repository provisions the infrastructure and deployment configuration for t
 ## Challenges
 
 I faced some difficulties converting the Terraform code from Azure to AWS. The Terraform documentation and AI assistance helped me resolve the issues and better understand the differences. My Helm experience is limited, so I was unable to get a full Helm deployment working. Instead, I added Kubernetes YAML configs for the deployment.
+
+## References
+- [AWS Documentation](https://docs.aws.amazon.com/)
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [Terraform AWS Provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
+- [Spring Petclinic Application](https://spring-petclinic.github.io/)
