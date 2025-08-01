@@ -1,16 +1,15 @@
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: spring-petclinic
   namespace: spring-petclinic
   annotations:
-    kubernetes.io/ingress.class: "alb"  # or nginx if you're using nginx
+    kubernetes.io/ingress.class: "alb"
     alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
 spec:
   rules:
-    - host: petclinic.example.com  # Replace with actual domain
-      http:
+    - http:
         paths:
           - path: /
             pathType: Prefix

@@ -53,6 +53,7 @@ metadata:
   name: spring-petclinic
   namespace: spring-petclinic
 spec:
+  type: LoadBalancer
   selector:
     app: spring-petclinic
   ports:
