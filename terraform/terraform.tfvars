@@ -1,5 +1,5 @@
-instance_class         = "db.t3.medium"
-instance_class_replica = "db.t3.medium"
+instance_class         = "db.t4g.micro"
+instance_class_replica = "db.t4g.micro"
 username               = "petclinic"
 database_name          = "petclinic"
 aws_region             = "ap-south-1"

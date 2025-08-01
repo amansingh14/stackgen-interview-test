@@ -52,8 +52,8 @@ module "db1" {
   instance_class                = var.instance_class
   administrator_login           = var.username
   administrator_login_password  = var.administrator_login_password
-  storage                       = 625
-  max_allocated_storage         = 1000
+  storage                       = 20
+  max_allocated_storage         = 100
   backup_retention_days         = 7
   geo_redundant_backup_enabled  = true
   public_network_access_enabled = false
