@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: spring-petclinic
-          image: 311042608416.dkr.ecr.ap-south-1.amazonaws.com/spring-petclinic:latest
+          image: 311042608416.dkr.ecr.ap-south-1.amazonaws.com/stackgen-petclinic:latest
           ports:
             - containerPort: 8080
           env:
