@@ -1,0 +1,49 @@
+name: Deploy Spring Pet clinic to EKS (Manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: "Docker image tag (e.g., latest or commit SHA)"
+        required: false
+        default: latest
+
+env:
+  AWS_REGION: ap-south-1
+  EKS_CLUSTER: stackgen-petclinic
+
+jobs:
+  deploy:
+    name: Manual Build, Push & Deploy
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ROLE_NAME }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        run: |
+          aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${{ secrets.ECR_REPO_URI }}
+
+
+      - name: Update kubeconfig
+        run: |
+          aws eks update-kubeconfig --region $AWS_REGION --name $EKS_CLUSTER
+
+      - name: Deploy to EKS
+        run: |
+          export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
+
+          # Replace DB_PASSWORD in configmap
+          envsubst < deployment/configmap.yaml | kubectl apply -n spring-petclinic -f -
+          kubectl apply -n spring-petclinic -f - deployment/deployment.yaml
+          # Apply other resources
+          kubectl apply -n spring-petclinic -f deployment/service.yaml
+          kubectl apply -n spring-petclinic -f deployment/ingress.yaml
